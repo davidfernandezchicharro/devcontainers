@@ -7,5 +7,15 @@
     "remoteEnv": {
       "WP_ENV": "development"
     },
-    "postCreateCommand": "cp -n /roots/app/.devcontainer/.env.example /roots/app/.env"
-  }
+    "postCreateCommand": "cp -n /roots/app/.devcontainer/.env.example /roots/app/.env",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "bmewburn.vscode-intelephense-client",
+                "xdebug.php-debug",
+                "mrmlnc.vscode-apache",
+                "johnbillion.vscode-wordpress-hooks"
+            ]
+        }
+    }
+}

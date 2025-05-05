@@ -3,7 +3,9 @@ version: '3'
 
 services:
   app:
-    image: mcr.microsoft.com/devcontainers/php:8.2
+    build: 
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - ..:/roots/app
     ports:
