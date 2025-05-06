@@ -1,21 +1,46 @@
 {
-    "name": "Bedrock Development",
-    "dockerComposeFile": ["docker-compose.yml"],
-    "service": "app",
-    "workspaceFolder": "/roots/app",
-    "forwardPorts": [8080],
-    "remoteEnv": {
-      "WP_ENV": "development"
+    "name": "Bedrock",
+    "dockerFile": "Dockerfile",
+    "features": {
+      "ghcr.io/devcontainers/features/php:1": {
+        "version": "8.1",
+        "extensions": [
+          "pdo",
+          "pdo_mysql",
+          "mysqli",
+          "mbstring",
+          "intl",
+          "curl",
+          "dom",
+          "zip",
+          "bcmath"
+        ]
+      },
+      "ghcr.io/devcontainers/features/node:1": {
+        "version": "18"
+      },
+      "ghcr.io/devcontainers/features/mysql:1": {
+        "version": "8.0",
+        "port": 3306
+      }
     },
-    "postCreateCommand": "cp -n /roots/app/.devcontainer/.env.example /roots/app/.env",
+    "postCreateCommand": "composer install && npm install",
+    "forwardPorts": [80, 3306],
+    "remoteUser": "vscode",
+    "mounts": [
+      "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+    ],
     "customizations": {
-        "vscode": {
-            "extensions": [
-                "bmewburn.vscode-intelephense-client",
-                "xdebug.php-debug",
-                "mrmlnc.vscode-apache",
-                "johnbillion.vscode-wordpress-hooks"
-            ]
-        }
+      "vscode": {
+        "settings": {
+          "terminal.integrated.defaultProfile.linux": "bash"
+        },
+        "extensions": [
+          "bmewburn.vscode-intelephense-client",
+          "esbenp.prettier-vscode",
+          "editorconfig.editorconfig"
+        ]
+      }
     }
-}
+  }
+  
